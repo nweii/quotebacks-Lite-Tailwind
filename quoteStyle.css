@@ -57,8 +57,8 @@
 }
 
 .quoteback-container {
-  font-family: var(--system-fonts);
-  text-rendering: optimizeLegibility;
+  /* font-family: var(--system-fonts); */
+  /* text-rendering: optimizeLegibility; */
   border: 1px solid var(--border-color-normal);
   border-radius: 8px;
   margin-bottom: 25px;

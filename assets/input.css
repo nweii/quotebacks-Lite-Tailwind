@@ -28,12 +28,12 @@
   }
 
   figcaption {
-    @apply text-stone-500 dark:text-stone-50/[.7] text-sm mt-2;
+    @apply mt-2 text-sm text-stone-500 dark:text-stone-50/[.7];
   }
 }
 
 @layer components {
   .link-hover {
-    @apply hover:text-emerald-500 dark:hover:text-emerald-300 hover:-translate-y-[0.08rem] transition ease-in-out;
+    @apply transition ease-in-out hover:-translate-y-[0.08rem] hover:text-emerald-500 dark:hover:text-emerald-300;
   }
 }
