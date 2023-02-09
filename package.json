@@ -1,5 +1,5 @@
 {
-  "name": "quotebacksLite-Tailwind",
+  "name": "quotebacks-Lite-Tailwind",
   "version": "1.0.0",
   "description": "A version of Quotebacks simplified for those who only want the costmetic style of quotebacks cards applied to blockquotes. This version uses Tailwind for the styling.",
   "main": "index.js",
