@@ -9,6 +9,7 @@
   "author": "Nathan Cheng",
   "license": "ISC",
   "devDependencies": {
+    "@tailwindcss/line-clamp": "^0.4.2",
     "@tailwindcss/typography": "^0.5.9",
     "prettier": "^2.8.4",
     "prettier-plugin-tailwindcss": "^0.2.2",
