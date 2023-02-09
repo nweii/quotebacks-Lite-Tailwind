@@ -1,35 +1,37 @@
-document.addEventListener("DOMContentLoaded", function() {
-	// get all our classed blockquote components
-	const index = document.querySelectorAll(".quoteback");
+document.addEventListener("DOMContentLoaded", function () {
+  // get all blockquotes with class "quoteback"
+  const index = document.querySelectorAll(".quoteback");
+  // Or replace with document.getElementsByTagName('blockquote') to apply to all blockquotes
 
-	for (var item = 0; item < index.length; item++) {
-		let blockquote = index[item];
-		
-		console.log("Rebuilding blockquote:");
-		console.log(blockquote);
-		
-		// get blockquote data
-		const text = blockquote.innerHTML;
-		const url = blockquote.cite;
-		const author = blockquote.getAttribute("data-author");
-		const title = blockquote.getAttribute("data-title");
-		const favicon = `https://s2.googleusercontent.com/s2/favicons?domain_url=${url}&sz=64`
+  for (var item = 0; item < index.length; item++) {
+    let blockquote = index[item];
+    console.log("Rebuilding blockquote:");
+    console.log(blockquote);
 
-		// create a new component with that data
-		const component = `
-			<quoteback-component url="${url}" text="${encodeURIComponent(text)}" author="${author}" title="${title}" favicon="${favicon}"> 
+    // get blockquote data
+    const text = blockquote.innerHTML;
+    const url = blockquote.cite;
+    const author = blockquote.getAttribute("data-author");
+    const title = blockquote.getAttribute("data-title");
+    const favicon = `https://s2.googleusercontent.com/s2/favicons?domain_url=${url}&sz=64`;
+
+    // create a new component with that data
+    const component = `
+			<quoteback-component url="${url}" text="${encodeURIComponent(
+      text
+    )}" author="${author}" title="${title}" favicon="${favicon}"> 
 			</quoteback-component>    
 			`;
-		// nest the component inside a div
-		let newDiv = document.createElement('div');
-		newDiv.innerHTML = component;
-		
-		// replace the original blockquote with our div
-		blockquote.parentNode.replaceChild(newDiv, blockquote);
-		
-		let template = document.createElement('template');
-		template.innerHTML = `
-			<style>${quoteStyle}</style>
+    // nest the component inside a div
+    let newDiv = document.createElement("div");
+    newDiv.innerHTML = component;
+
+    // replace the original blockquote with our div
+    blockquote.parentNode.replaceChild(newDiv, blockquote);
+
+    let template = document.createElement("template");
+    template.innerHTML = `
+			<link href="/quoteStyle.css" rel="stylesheet">
 			<div class="quoteback-container" role="quotation" aria-labelledby="quoteback-author" tabindex="0">
 				<div id="quoteback-parent" class="quoteback-parent">
 					<div class="quoteback-content"></div>
@@ -46,61 +48,87 @@ document.addEventListener("DOMContentLoaded", function() {
 				</div>
 			</div>`;
 
-		class QuoteBack extends HTMLElement {
-			constructor() {
-				super();
-				this.attachShadow({ mode: 'open' });
-				this.shadowRoot.appendChild(template.content.cloneNode(true));
-				
-				this.text = decodeURIComponent(this.getAttribute('text'));
-				this.author = this.getAttribute('author');
-				this.title = decodeURIComponent(this.getAttribute('title'));
-				this.url = this.getAttribute('url')
-				this.favicon = this.getAttribute('favicon');
-				this.editable = this.getAttribute('editable');
-				this.darkmode = this.getAttribute('darkmode')
-				
-			};
+    class QuoteBack extends HTMLElement {
+      constructor() {
+        super();
+        this.attachShadow({ mode: "open" });
+        this.shadowRoot.appendChild(template.content.cloneNode(true));
 
-			connectedCallback() {
-				console.info('connected');
-				if (this.editable == "true") {
-					this.shadowRoot.querySelector('.quoteback-author').setAttribute("contenteditable", true);
-					this.shadowRoot.querySelector('.quoteback-title').setAttribute("contenteditable", true);
-				}
+        this.text = decodeURIComponent(this.getAttribute("text"));
+        this.author = this.getAttribute("author");
+        this.title = decodeURIComponent(this.getAttribute("title"));
+        this.url = this.getAttribute("url");
+        this.favicon = this.getAttribute("favicon");
+        this.editable = this.getAttribute("editable");
+        this.darkmode = this.getAttribute("darkmode");
+      }
 
-				if (this.darkmode == "true") {
-					this.shadowRoot.querySelector('.quoteback-container').classList += " dark-theme";
-				}
+      connectedCallback() {
+        console.info("connected");
+        if (this.editable == "true") {
+          this.shadowRoot
+            .querySelector(".quoteback-author")
+            .setAttribute("contenteditable", true);
+          this.shadowRoot
+            .querySelector(".quoteback-title")
+            .setAttribute("contenteditable", true);
+        }
 
-				if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-					this.shadowRoot.querySelector('.quoteback-container').classList += " dark-theme";
-				}
+        if (this.darkmode == "true") {
+          this.shadowRoot.querySelector(".quoteback-container").classList +=
+            " dark-theme";
+        }
 
-				this.shadowRoot.querySelector('.quoteback-content').innerHTML = decodeURIComponent(this.getAttribute('text'));
-				this.shadowRoot.querySelector('.mini-favicon').src = this.getAttribute('favicon');
+        if (
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+        ) {
+          this.shadowRoot.querySelector(".quoteback-container").classList +=
+            " dark-theme";
+        }
 
-				this.shadowRoot.querySelector('.quoteback-author').innerHTML = this.getAttribute('author');
-				this.shadowRoot.querySelector('.quoteback-author').setAttribute("aria-label", "quote by " + this.getAttribute('author'));
+        this.shadowRoot.querySelector(".quoteback-content").innerHTML =
+          decodeURIComponent(this.getAttribute("text"));
+        this.shadowRoot.querySelector(".mini-favicon").src =
+          this.getAttribute("favicon");
 
-				this.shadowRoot.querySelector('.quoteback-title').innerHTML = decodeURIComponent(this.getAttribute('title'));
-				this.shadowRoot.querySelector('.quoteback-title').setAttribute("aria-label", "title: " + decodeURIComponent(this.getAttribute('title')));
+        this.shadowRoot.querySelector(".quoteback-author").innerHTML =
+          this.getAttribute("author");
+        this.shadowRoot
+          .querySelector(".quoteback-author")
+          .setAttribute(
+            "aria-label",
+            "quote by " + this.getAttribute("author")
+          );
 
-				this.shadowRoot.querySelector('.quoteback-arrow').href = this.getAttribute('url');
+        this.shadowRoot.querySelector(".quoteback-title").innerHTML =
+          decodeURIComponent(this.getAttribute("title"));
+        this.shadowRoot
+          .querySelector(".quoteback-title")
+          .setAttribute(
+            "aria-label",
+            "title: " + decodeURIComponent(this.getAttribute("title"))
+          );
 
-				if (this.getAttribute('editable') == "true") {
-					this.shadowRoot.querySelector('.quoteback-author').setAttribute("contenteditable", true);
-					this.shadowRoot.querySelector('.quoteback-title').setAttribute("contenteditable", true);
-				};
-			};
+        this.shadowRoot.querySelector(".quoteback-arrow").href =
+          this.getAttribute("url");
 
-		}
+        if (this.getAttribute("editable") == "true") {
+          this.shadowRoot
+            .querySelector(".quoteback-author")
+            .setAttribute("contenteditable", true);
+          this.shadowRoot
+            .querySelector(".quoteback-title")
+            .setAttribute("contenteditable", true);
+        }
+      }
+    }
 
-		// if quoteback-component is already defined
-		if (customElements.get('quoteback-component')) {
-			null;
-		} else {
-			window.customElements.define('quoteback-component', QuoteBack)
-		}
-	}
+    // if quoteback-component is already defined
+    if (customElements.get("quoteback-component")) {
+      null;
+    } else {
+      window.customElements.define("quoteback-component", QuoteBack);
+    }
+  }
 });

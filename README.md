@@ -1,7 +1,9 @@
 # Quotebacks Lite (with Tailwind CSS)
-A version of [Quotebacks](https://github.com/Blogger-Peer-Review/quotebacks) (Made by [Tom Critchlow](https://twitter.com/tomcritchlow) and [Toby Shorin](https://twitter.com/tobyshorin)) simplified for those who only want the cosmetic style of the Quoteback cards applied to `<blockquote>`s. This version uses [Tailwind CSS](https://tailwindcss.com/) to apply the styling. 
+
+A version of [Quotebacks](https://github.com/Blogger-Peer-Review/quotebacks) (Made by [Tom Critchlow](https://twitter.com/tomcritchlow) and [Toby Shorin](https://twitter.com/tobyshorin)) simplified for those who only want the cosmetic style of the Quoteback cards applied to `<blockquote>`s. This version uses [Tailwind CSS](https://tailwindcss.com/) to apply the styling.
 
 ## Original Copyright info
+
 ---
 
 Copyright 2020 Tom Critchlow & Toby Shorin
