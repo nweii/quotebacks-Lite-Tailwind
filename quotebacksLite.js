@@ -1,7 +1,9 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
   // get all blockquotes with class "quoteback"
   const index = document.querySelectorAll(".quoteback");
   // Or replace with document.getElementsByTagName('blockquote') to apply to all blockquotes
+
+  const css = "/assets/output.css";
 
   for (var item = 0; item < index.length; item++) {
     let blockquote = index[item];
@@ -31,20 +33,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let template = document.createElement("template");
     template.innerHTML = `
-			<link href="/quoteStyle.css" rel="stylesheet">
-			<div class="quoteback-container" role="quotation" aria-labelledby="quoteback-author" tabindex="0">
-				<div id="quoteback-parent" class="quoteback-parent">
-					<div class="quoteback-content"></div>
+			<link href="${css}" rel="stylesheet">
+			<div id="quoteback-container" class="mb-6 max-w-[70ch] rounded-lg border border-solid border-stone-300 bg-stone-50/80 shadow-sm transition hover:-translate-y-1 hover:shadow-xl dark:border-stone-50/[.12] dark:bg-stone-800 dark:shadow-[0_1px_2px_0_rgba(0,0,0,0.2)] dark:hover:shadow-[0_20px_25px_-5px_rgba(0,0,0,0.15),0_8px_10px_-6px_rgba(0,0,0,0.15)] [@media(hover:none)]:shadow-lg" role="quotation" aria-labelledby="quoteback-author" tabindex="0">
+				<div id="quoteback-parent" class="relative box-border w-full overflow-hidden">
+					<div id="quoteback-content" class="prose prose-stone px-4 py-3.5 leading-relaxed text-stone-900/80 prose-p:mb-1 prose-a:underline prose-a:underline-offset-2 prose-a:transition-opacity hover:prose-a:opacity-50 hover:prose-a:cursor-pointer prose-blockquote:mt-0 prose-blockquote:mb-1 prose-ol:mt-0 prose-ul:mt-0 dark:prose-invert dark:text-stone-50/80 dark:hover:prose-a:text-emerald-300"></div>
 				</div>
-				<div class="quoteback-head">
-					<div class="quoteback-avatar"><img alt="source website favicon" class="mini-favicon" src="" /></div>
-					<div class="quoteback-metadata">
-						<div class="metadata-inner">
-							<div aria-label="" id="quoteback-author" class="quoteback-author"></div>
-							<div aria-label="" class="quoteback-title"></div>
+				<div id="quoteback-head" class="flex flex-row flex-nowrap items-stretch justify-start border-t border-stone-300 pl-4 dark:border-stone-50/[.12]">
+					<div id="quoteback-avatar" class="!min-w-10 relative my-2 mx-0 w-5 flex-none rounded-full border-stone-300 dark:border-stone-50/[.12] max-[336px]:w-4 max-[304px]:hidden"><img id="mini-favicon" class="max-w-5 absolute inset-y-0 left-0 m-auto aspect-square w-full rounded-sm md:w-8" alt="source website favicon" src="" /></div>
+					<div id="quoteback-metadata" class="ml-3 flex min-w-0 shrink items-center max-[304px]:ml-0">
+						<div id="metadata-inner" class="my-3 w-full max-w-[525px] pr-2 text-sm font-semibold leading-tight line-clamp-2">
+							<div aria-label="" id="quoteback-author" class="mb-0.5 text-stone-900/80 dark:text-stone-50/80"></div>
+							<div aria-label="" id="quoteback-title" class="pr-4 font-medium leading-normal text-stone-500 line-clamp-2 dark:text-stone-50/70"></div>
 						</div>
 					</div>
-					<div class="quoteback-backlink"><a target="_blank" aria-label="go to the full text of this quotation" rel="noopener" href="" class="quoteback-arrow"><span class="right-arrow">&#8594;</span></a></div>
+					<div id="quoteback-backlink" class="ml-auto flex w-5 items-center justify-center border-l border-stone-300 py-0 px-5 dark:border-stone-50/[.12]"><a target="_blank" aria-label="go to the full text of this quotation" rel="noopener" href="" id="quoteback-arrow" class="border-none text-lg text-stone-500 no-underline transition-colors transition-transform hover:-translate-y-0.5 hover:text-emerald-500 dark:text-stone-50/70 dark:hover:text-emerald-300"><span class="right-arrow">&#8594;</span></a></div>
 				</div>
 			</div>`;
 
@@ -64,63 +66,31 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       connectedCallback() {
-        console.info("connected");
-        if (this.editable == "true") {
-          this.shadowRoot
-            .querySelector(".quoteback-author")
-            .setAttribute("contenteditable", true);
-          this.shadowRoot
-            .querySelector(".quoteback-title")
-            .setAttribute("contenteditable", true);
-        }
-
-        if (this.darkmode == "true") {
-          this.shadowRoot.querySelector(".quoteback-container").classList +=
-            " dark-theme";
-        }
-
-        if (
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches
-        ) {
-          this.shadowRoot.querySelector(".quoteback-container").classList +=
-            " dark-theme";
-        }
-
-        this.shadowRoot.querySelector(".quoteback-content").innerHTML =
+        this.shadowRoot.querySelector("#quoteback-content").innerHTML =
           decodeURIComponent(this.getAttribute("text"));
-        this.shadowRoot.querySelector(".mini-favicon").src =
+        this.shadowRoot.querySelector("#mini-favicon").src =
           this.getAttribute("favicon");
 
-        this.shadowRoot.querySelector(".quoteback-author").innerHTML =
+        this.shadowRoot.querySelector("#quoteback-author").innerHTML =
           this.getAttribute("author");
         this.shadowRoot
-          .querySelector(".quoteback-author")
+          .querySelector("#quoteback-author")
           .setAttribute(
             "aria-label",
             "quote by " + this.getAttribute("author")
           );
 
-        this.shadowRoot.querySelector(".quoteback-title").innerHTML =
+        this.shadowRoot.querySelector("#quoteback-title").innerHTML =
           decodeURIComponent(this.getAttribute("title"));
         this.shadowRoot
-          .querySelector(".quoteback-title")
+          .querySelector("#quoteback-title")
           .setAttribute(
             "aria-label",
             "title: " + decodeURIComponent(this.getAttribute("title"))
           );
 
-        this.shadowRoot.querySelector(".quoteback-arrow").href =
+        this.shadowRoot.querySelector("#quoteback-arrow").href =
           this.getAttribute("url");
-
-        if (this.getAttribute("editable") == "true") {
-          this.shadowRoot
-            .querySelector(".quoteback-author")
-            .setAttribute("contenteditable", true);
-          this.shadowRoot
-            .querySelector(".quoteback-title")
-            .setAttribute("contenteditable", true);
-        }
       }
     }
 
