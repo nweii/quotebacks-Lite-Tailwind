@@ -1,0 +1,15 @@
+{
+  "name": "quotebacksLite-Tailwind",
+  "version": "1.0.0",
+  "description": "A version of Quotebacks simplified for those who only want the costmetic style of quotebacks cards applied to blockquotes. This version uses Tailwind for the styling.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nathan Cheng",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9",
+    "tailwindcss": "^3.2.4"
+  }
+}
