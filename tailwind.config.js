@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["*.{html,js}"],
+  content: ["index.html"],
   theme: {
     extend: {
       typography: ({ theme }) => ({
@@ -44,4 +44,7 @@ module.exports = {
     },
   },
   plugins: [require('@tailwindcss/line-clamp'), require("@tailwindcss/typography")],
+  corePlugins: {
+    preflight: false,
+  }
 };
