@@ -41,9 +41,9 @@ document.addEventListener("DOMContentLoaded", function() {
 				<div id="quoteback-head" class="flex flex-row flex-nowrap items-stretch justify-start border-t border-stone-300 pl-4 dark:border-stone-50/[.12]">
 					<div id="quoteback-avatar" class="!min-w-10 relative my-2 mx-0 w-5 flex-none rounded-full border-stone-300 dark:border-stone-50/[.12] max-[336px]:w-4 max-[304px]:hidden"><img id="mini-favicon" class="max-w-5 absolute inset-y-0 left-0 m-auto aspect-square w-full rounded-sm" alt="source website favicon" src="" /></div>
 					<div id="quoteback-metadata" class="ml-3 flex min-w-0 shrink items-center max-[304px]:ml-0">
-						<div id="metadata-inner" class="my-3 w-full max-w-[525px] pr-2 text-sm font-semibold leading-tight line-clamp-2">
-							<div aria-label="" id="quoteback-author" class="mb-0.5 text-stone-900/80 dark:text-stone-50/80"></div>
-							<div aria-label="" id="quoteback-title" class="pr-4 font-medium leading-normal text-stone-500 line-clamp-2 dark:text-stone-50/70"></div>
+						<div id="metadata-inner" class="my-3 w-full pr-2 text-sm font-semibold leading-normal">
+							<div aria-label="" id="quoteback-author" class="mb-0.5 text-stone-900/80 dark:text-stone-50/80 line-clamp-1"></div>
+							<div aria-label="" id="quoteback-title" class="pr-4 font-medium text-stone-500 line-clamp-2 dark:text-stone-50/70"></div>
 						</div>
 					</div>
 					<div id="quoteback-backlink" class="ml-auto flex w-5 items-center justify-center border-l border-stone-300 py-0 px-4 dark:border-stone-50/[.12]"><a target="_blank" aria-label="go to the full text of this quotation" rel="noopener" href="" id="quoteback-arrow" class="border-none text-lg text-stone-500 no-underline transition-colors transition-transform hover:-translate-y-0.5 hover:text-emerald-500 dark:text-stone-50/70 dark:hover:text-emerald-300"><span class="right-arrow">&#8594;</span></a></div>
