@@ -5,7 +5,7 @@ A version of [Quotebacks](https://github.com/Blogger-Peer-Review/quotebacks) (Ma
 ## Changes made to original
 - Updated styling with Tailwind colors and classes — softer overall appearance.
 - Automatic dark mode based on system appearance.
-- Subtle shadows (which are darker in dark mode) and card hover animation.
+- Subtle shadows (which are darker in dark mode for added visibility) and card hover animation.
 - Smaller favicon style. Even smaller favicon on very small window widths. Hidden favicon on the smallest widths.
 - Replaced "Go to Text" label with → arrow to save space.
 
