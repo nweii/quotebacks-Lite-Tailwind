@@ -2,3 +2,4 @@ node_modules
 .nova
 .DS_Store
 quoteStyle.css
+preview.html
